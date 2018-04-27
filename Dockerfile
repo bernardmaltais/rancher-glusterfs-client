@@ -3,7 +3,7 @@ FROM bmaltais/rancher-stack-base:latest
 # MAINTAINER Manel Martinez <manel@nixelsolutions.com>
 
 RUN apt-get update && \
-    apt-get install -y nodejs nginx glusterfs-client dnsutils iputils-ping
+    apt-get install -y nginx glusterfs-client dnsutils iputils-ping
 
 
 ENV GLUSTER_VOL ranchervol
