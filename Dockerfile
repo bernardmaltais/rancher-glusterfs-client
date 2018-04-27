@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-MAINTAINER Manel Martinez <manel@nixelsolutions.com>
+# MAINTAINER Manel Martinez <manel@nixelsolutions.com>
 
 RUN apt-get update && \
     apt-get install -y python-software-properties software-properties-common
