@@ -3,10 +3,7 @@ FROM ubuntu:14.04
 # MAINTAINER Manel Martinez <manel@nixelsolutions.com>
 
 RUN apt-get update && \
-    apt-get install -y python-software-properties software-properties-common
-RUN add-apt-repository -y ppa:gluster/glusterfs-3.5 && \
-    apt-get update && \
-    apt-get install -y git nodejs nginx supervisor glusterfs-client dnsutils
+    apt-get install -y python-software-properties software-properties-common git nodejs nginx supervisor glusterfs-client dnsutils
 
 
 ENV GLUSTER_VOL ranchervol
