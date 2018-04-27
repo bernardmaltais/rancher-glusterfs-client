@@ -1,6 +1,6 @@
 server {
     listen HTTP_CLIENT_PORT;
     location / {
-        root HTTP_DOCUMENTROOT/client/;
+        root HTTP_DOCUMENTROOT/;
     }
 }
