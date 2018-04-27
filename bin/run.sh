@@ -19,7 +19,7 @@ if [ -z "${GLUSTER_PEERS}" ]; then
    echo "*** Exiting ..."
    exit 1
 else
-   echo "${GLUSTER_PEERS}
+   echo "${GLUSTER_PEERS}"
 fi
 
 for PEER in `echo "${GLUSTER_PEERS}" | sed "s/,/ /g"`; do
