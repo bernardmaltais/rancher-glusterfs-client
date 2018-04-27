@@ -1,9 +1,9 @@
-FROM ubuntu:14.04
+FROM bmaltais/rancher-stack-base:latest
 
 # MAINTAINER Manel Martinez <manel@nixelsolutions.com>
 
 RUN apt-get update && \
-    apt-get install -y python-software-properties software-properties-common git nodejs nginx supervisor glusterfs-client dnsutils
+    apt-get install -y nodejs nginx glusterfs-client dnsutils
 
 
 ENV GLUSTER_VOL ranchervol
