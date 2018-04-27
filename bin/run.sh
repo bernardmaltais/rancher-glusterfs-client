@@ -10,7 +10,19 @@ if [ "${GLUSTER_PEER}" == "**ChangeMe**" ]; then
 fi
 
 ALIVE=0
-for PEER in `echo "${GLUSTER_PEER}" | sed "s/,/ /g"`; do
+
+export GLUSTER_PEERS=`dig +short ${SERVICE_NAME} | sort`
+if [ -z "${GLUSTER_PEERS}" ]; then
+   echo "*** ERROR: Could not determine which containers are part of this service."
+   echo "*** Is this service named \"${SERVICE_NAME}\"? If not, please regenerate the service"
+   echo "*** and add SERVICE_NAME environment variable which value should be equal to this service name"
+   echo "*** Exiting ..."
+   exit 1
+else
+   echo "${GLUSTER_PEERS}
+fi
+
+for PEER in `echo "${GLUSTER_PEERS}" | sed "s/,/ /g"`; do
     echo "=> Checking if I can reach GlusterFS node ${PEER} ..."
     if ping -c 10 ${PEER} >/dev/null 2>&1; then
        echo "=> GlusterFS node ${PEER} is alive"
