@@ -1,10 +1,18 @@
-FROM bmaltais/rancher-stack-base-14-04:latest
+FROM ubuntu:14.04
 
 # Inspiration for php5 integration from from https://github.com/ftx/rancher-nginx-php-gluster-ha
 
-RUN add-apt-repository -y ppa:gluster/glusterfs-3.8 && \
+# Install some usefull package
+RUN add-apt-repository -y ppa:gluster/glusterfs-3.8 &&\
     apt-get update && \
-    apt-get install -y nginx glusterfs-client dnsutils iputils-ping php5-fpm
+    apt-get install -y python-software-properties software-properties-common locales &&\
+    update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
+    locale-gen en_US.UTF-8 && \
+    dpkg-reconfigure --frontend noninteractive locales
+    
+RUN apt-get update && \
+    apt-get install -y supervisor curl unzip pwgen inotify-tools dnsutils vim git wget \
+                       python-pip sudo logrotate nginx glusterfs-client dnsutils iputils-ping php5-fpm
 
 ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
@@ -21,6 +29,15 @@ EXPOSE ${GAME_SERVER_PORT}
 
 RUN mkdir -p /var/log/supervisor ${GLUSTER_VOL_PATH}
 WORKDIR ${GLUSTER_VOL_PATH}
+
+# Add Python API for rancher-metadata
+RUN pip install rancher_metadata
+
+# Add logrotate setting
+ADD assets/setup/logrotate-supervisor.conf /etc/logrotate.d/supervisord
+
+# Add supervisor setting
+ADD assets/setup/supervisor-cron.conf /etc/supervisor/conf.d/cron.conf
 
 RUN mkdir -p /usr/local/bin
 ADD ./bin /usr/local/bin
