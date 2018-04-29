@@ -4,11 +4,14 @@ server {
     index index.php index.html index.htm index.nginx-debian.html;
     
     location / {
-        try_files $uri $uri/ =404;
+        try_files $uri $uri/ /index.php?q=$uri&$args;
     }
     
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-    }
+	location ~ \.php$ {
+                try_files $uri =404;
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+	}
 }
