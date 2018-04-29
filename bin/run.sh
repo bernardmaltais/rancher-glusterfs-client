@@ -43,7 +43,7 @@ mount -t glusterfs ${PEER}:/${GLUSTER_VOL} ${GLUSTER_VOL_PATH}
 
 echo "=> Setting up site..."
 if [ ! -d ${HTTP_DOCUMENTROOT} ]; then
-   git clone ${GIT_SRC} ${HTTP_DOCUMENTROOT}
+   git clone ${HTTP_GIT_SRC} ${HTTP_DOCUMENTROOT}
    chown -R www-data:www-data ${HTTP_DOCUMENTROOT}
 fi
 
