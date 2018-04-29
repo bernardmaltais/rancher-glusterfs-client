@@ -3,14 +3,14 @@ FROM ubuntu:14.04
 # Inspiration for php5 integration from from https://github.com/ftx/rancher-nginx-php-gluster-ha
 
 # Install some usefull package
-RUN add-apt-repository -y ppa:gluster/glusterfs-3.8 &&\
-    apt-get update && \
+RUN apt-get update && \
     apt-get install -y python-software-properties software-properties-common locales &&\
     update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX && \
     locale-gen en_US.UTF-8 && \
     dpkg-reconfigure --frontend noninteractive locales
     
-RUN apt-get update && \
+RUN add-apt-repository -y ppa:gluster/glusterfs-3.8 && \
+    apt-get update && \
     apt-get install -y supervisor curl unzip pwgen inotify-tools dnsutils vim git wget \
                        python-pip sudo logrotate nginx glusterfs-client dnsutils iputils-ping php5-fpm
 
