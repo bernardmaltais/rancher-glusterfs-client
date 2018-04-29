@@ -19,6 +19,7 @@ ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
 ENV GLUSTER_PEER **ChangeMe**
 ENV SERVICE_NAME gluster
 ENV DEBUG 0
+ENV GIT_SRC https://github.com/bernardmaltais/demosite.git
 
 ENV HTTP_CLIENT_PORT 80
 ENV GAME_SERVER_PORT 443
