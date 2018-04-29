@@ -45,7 +45,7 @@ RUN mkdir -p /usr/local/bin
 ADD ./bin /usr/local/bin
 RUN chmod +x /usr/local/bin/*.sh
 ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ADD ./etc/nginx/sites-available/${HTTP_SITE_NAME} /etc/nginx/sites-available/${HTTP_SITE_NAME}
+ADD ./etc/nginx/sites-available/site /etc/nginx/sites-available/${HTTP_SITE_NAME}
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
