@@ -1,8 +1,5 @@
 FROM bmaltais/rancher-stack-base-14-04:latest
 
-RUN apt-get update && \
-    apt-get install -y python-software-properties software-properties-common
-    
 RUN add-apt-repository -y ppa:gluster/glusterfs-3.8 && \
     apt-get update && \
     apt-get install -y nginx glusterfs-client dnsutils iputils-ping php5-fpm
