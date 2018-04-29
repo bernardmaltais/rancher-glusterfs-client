@@ -5,7 +5,7 @@ FROM bmaltais/rancher-stack-base:latest
 RUN apt-get update && \
     apt-get install -y nginx php glusterfs-client dnsutils iputils-ping
 
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y php7-cli php7-fpm php7-mysql php7-pgsql php7-sqlite php7-curl\
+RUN apt-get install -y php7-cli php7-fpm php7-mysql php7-pgsql php7-sqlite php7-curl \
 		       php7-gd php7-mcrypt php7-intl php7-imap php7-tidy sed
 
 ENV GLUSTER_VOL ranchervol
