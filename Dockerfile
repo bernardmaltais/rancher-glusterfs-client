@@ -23,7 +23,8 @@ ENV GIT_SRC https://github.com/bernardmaltais/demosite.git
 
 ENV HTTP_CLIENT_PORT 80
 ENV GAME_SERVER_PORT 443
-ENV HTTP_DOCUMENTROOT ${GLUSTER_VOL_PATH}/asteroids/documentroot
+ENV HTTP_SITE_NAME www
+ENV HTTP_DOCUMENTROOT ${GLUSTER_VOL_PATH}/${HTTP_SITE_NAME}/documentroot
 
 EXPOSE ${HTTP_CLIENT_PORT}
 EXPOSE ${GAME_SERVER_PORT}
@@ -44,7 +45,7 @@ RUN mkdir -p /usr/local/bin
 ADD ./bin /usr/local/bin
 RUN chmod +x /usr/local/bin/*.sh
 ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ADD ./etc/nginx/sites-available/asteroids /etc/nginx/sites-available/asteroids
+ADD ./etc/nginx/sites-available/${HTTP_SITE_NAME} /etc/nginx/sites-available/${HTTP_SITE_NAME}
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
@@ -52,9 +53,9 @@ RUN rm -f /etc/nginx/sites-enabled/default
 RUN perl -p -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
 RUN perl -p -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 
-RUN ln -fs /etc/nginx/sites-available/asteroids /etc/nginx/sites-enabled/asteroids
-RUN perl -p -i -e "s/HTTP_CLIENT_PORT/${HTTP_CLIENT_PORT}/g" /etc/nginx/sites-enabled/asteroids
-RUN HTTP_ESCAPED_DOCROOT=`echo ${HTTP_DOCUMENTROOT} | sed "s/\//\\\\\\\\\//g"` && perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/nginx/sites-enabled/asteroids
+RUN ln -fs /etc/nginx/sites-available/${HTTP_SITE_NAME} /etc/nginx/sites-enabled/${HTTP_SITE_NAME}
+RUN perl -p -i -e "s/HTTP_CLIENT_PORT/${HTTP_CLIENT_PORT}/g" /etc/nginx/sites-enabled/${HTTP_SITE_NAME}
+RUN HTTP_ESCAPED_DOCROOT=`echo ${HTTP_DOCUMENTROOT} | sed "s/\//\\\\\\\\\//g"` && perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/nginx/sites-enabled/${HTTP_SITE_NAME}
 
 RUN perl -p -i -e "s/GAME_SERVER_PORT/${GAME_SERVER_PORT}/g" /etc/supervisor/conf.d/supervisord.conf
 RUN HTTP_ESCAPED_DOCROOT=`echo ${HTTP_DOCUMENTROOT} | sed "s/\//\\\\\\\\\//g"` && perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/supervisor/conf.d/supervisord.conf
