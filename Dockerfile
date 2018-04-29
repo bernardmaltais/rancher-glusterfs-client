@@ -4,11 +4,9 @@ FROM bmaltais/rancher-stack-base:latest
 
 RUN apt-get update && \
     apt-get install -y nginx php glusterfs-client dnsutils iputils-ping
-RUN add-apt-repository -y ppa:ondrej/php5
-RUN add-apt-repository -y ppa:nginx/stable
-RUN apt-get update
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes php5-cli php5-fpm php5-mysql php5-pgsql php5-sqlite php5-curl\
-		       php5-gd php5-mcrypt php5-intl php5-imap php5-tidy sed
+
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y php7-cli php7-fpm php7-mysql php7-pgsql php7-sqlite php7-curl\
+		       php7-gd php7-mcrypt php7-intl php7-imap php7-tidy sed
 
 ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
