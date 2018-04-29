@@ -8,7 +8,6 @@ RUN add-apt-repository -y ppa:gluster/glusterfs-3.8 && \
 
 ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
-ENV GLUSTER_PEER **ChangeMe**
 ENV SERVICE_NAME gluster
 ENV DEBUG 0
 
