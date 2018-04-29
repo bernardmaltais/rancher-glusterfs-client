@@ -50,6 +50,10 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
 
 RUN perl -p -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
+
+# Enable to run PHP in html files
+RUN perl -p -i -e "s/;security.limit_extensions = .php .php3 .php4 .php5/security.limit_extensions = .php .html/g" /etc/php5/fpm/pool.d/www.conf
+
 RUN perl -p -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 
 RUN ln -fs /etc/nginx/sites-available/${HTTP_SITE_NAME} /etc/nginx/sites-enabled/${HTTP_SITE_NAME}
