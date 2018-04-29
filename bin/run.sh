@@ -44,6 +44,7 @@ mount -t glusterfs ${PEER}:/${GLUSTER_VOL} ${GLUSTER_VOL_PATH}
 echo "=> Setting up site..."
 if [ ! -d ${HTTP_DOCUMENTROOT} ]; then
    git clone https://github.com/bernardmaltais/demosite.git ${HTTP_DOCUMENTROOT}
+   chown -R www-data:www-data ${HTTP_DOCUMENTROOT}
 fi
 
 #my_public_ip=`dig -4 @ns1.google.com -t txt o-o.myaddr.l.google.com +short | sed "s/\"//g"`
