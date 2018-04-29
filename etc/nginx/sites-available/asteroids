@@ -1,25 +1,14 @@
 server {
     listen HTTP_CLIENT_PORT;
     root HTTP_DOCUMENTROOT/;
-    index index.html index.htm index.php;
+    index index.php index.html index.htm index.nginx-debian.html;
     
     location / {
-        try_files $uri $uri/ /index.html /index.php?$query_string;
+        try_files $uri $uri/ =404;
     }
     
     location ~ \.php$ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        # With php5-fpm:
-        fastcgi_pass unix:/var/run/php5-fpm.sock;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        include fastcgi.conf;
-        fastcgi_param LARA_ENV local; # Environment variable for Laravel
-        fastcgi_param HTTPS off;
-    }
-
-    # Deny .htaccess file access
-    location ~ /\.ht {
-        deny all;
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
     }
 }
