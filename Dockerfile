@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 # MAINTAINER Manel Martinez <manel@nixelsolutions.com>
 
 RUN apt-get update && \
-    apt-get install -y nginx php glusterfs-client dnsutils iputils-ping php5-fpm
+    apt-get install -y nginx glusterfs-client dnsutils iputils-ping php5-fpm
 
 
 ENV GLUSTER_VOL ranchervol
