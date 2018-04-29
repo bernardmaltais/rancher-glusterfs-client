@@ -2,8 +2,9 @@ FROM bmaltais/rancher-stack-base:latest
 
 # MAINTAINER Manel Martinez <manel@nixelsolutions.com>
 
+RUN add-apt-repository -y ppa:ondrej/php5
 RUN apt-get update && \
-    apt-get install -y nginx php glusterfs-client dnsutils iputils-ping sed
+    apt-get install -y nginx php5 glusterfs-client dnsutils iputils-ping sed
 
 ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
@@ -29,7 +30,8 @@ ADD ./etc/nginx/sites-available/asteroids /etc/nginx/sites-available/asteroids
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
-RUN sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php7.0/fpm/php.ini
+RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
+RUN sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php5/fpm/php.ini
 
 RUN ln -fs /etc/nginx/sites-available/asteroids /etc/nginx/sites-enabled/asteroids
 RUN perl -p -i -e "s/HTTP_CLIENT_PORT/${HTTP_CLIENT_PORT}/g" /etc/nginx/sites-enabled/asteroids
