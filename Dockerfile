@@ -1,5 +1,7 @@
 FROM bmaltais/rancher-stack-base-14-04:latest
 
+# Inspiration for php5 integration from from https://github.com/ftx/rancher-nginx-php-gluster-ha
+
 RUN add-apt-repository -y ppa:gluster/glusterfs-3.8 && \
     apt-get update && \
     apt-get install -y nginx glusterfs-client dnsutils iputils-ping php5-fpm
