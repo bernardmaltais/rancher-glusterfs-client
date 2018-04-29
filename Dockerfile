@@ -3,10 +3,7 @@ FROM bmaltais/rancher-stack-base:latest
 # MAINTAINER Manel Martinez <manel@nixelsolutions.com>
 
 RUN apt-get update && \
-    apt-get install -y nginx php glusterfs-client dnsutils iputils-ping
-
-RUN apt-get install -y php7-cli php7-fpm php7-mysql php7-pgsql php7-sqlite php7-curl \
-		       php7-gd php7-mcrypt php7-intl php7-imap php7-tidy sed
+    apt-get install -y nginx php glusterfs-client dnsutils iputils-ping sed
 
 ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
