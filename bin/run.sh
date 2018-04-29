@@ -4,11 +4,6 @@ set -e
 
 [ "$DEBUG" == "1" ] && set -x && set +e
 
-if [ "${GLUSTER_PEER}" == "**ChangeMe**" ]; then
-   echo "ERROR: You did not specify "GLUSTER_PEER" environment variable - Exiting..."
-   exit 0
-fi
-
 ALIVE=0
 
 export GLUSTER_PEERS=`dig +short ${SERVICE_NAME} | sort`
@@ -34,7 +29,7 @@ for PEER in `echo "${GLUSTER_PEERS}" | sed "s/,/ /g"`; do
 done
 
 if [ "$ALIVE" == 0 ]; then
-   echo "ERROR: could not contact any GlusterFS node from this list: ${GLUSTER_PEER} - Exiting..."
+   echo "ERROR: could not contact any GlusterFS node from this list: ${GLUSTER_PEERS} - Exiting..."
    exit 1
 fi
 
