@@ -1,4 +1,4 @@
-FROM bmaltais/rancher-stack-base:latest
+FROM ubuntu:14.04
 
 # MAINTAINER Manel Martinez <manel@nixelsolutions.com>
 
