@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM bmaltais/rancher-stack-base-14-04:latest
 
 RUN apt-get update && \
     apt-get install -y nginx glusterfs-client dnsutils iputils-ping php5-fpm
@@ -28,8 +28,8 @@ ADD ./etc/nginx/sites-available/asteroids /etc/nginx/sites-available/asteroids
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
 
-perl -p -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
-perl -p -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
+RUN perl -p -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
+RUN perl -p -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 
 RUN ln -fs /etc/nginx/sites-available/asteroids /etc/nginx/sites-enabled/asteroids
 RUN perl -p -i -e "s/HTTP_CLIENT_PORT/${HTTP_CLIENT_PORT}/g" /etc/nginx/sites-enabled/asteroids
