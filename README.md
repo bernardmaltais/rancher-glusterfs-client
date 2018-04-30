@@ -17,14 +17,11 @@ Current Version: **0.1.0**
 Like I have say at the beginning, this container work only on Rancher plateform. On your stack (applications), create new service (Add Service).
 
 ## Main section
-- NAME : Put 'gluster' as a name of your service. If you change this name, you must add environment variable name SERVICE_NAME with the name of your current service.
-- SCALE:  Run 2 or more container. I think you can start with 2 and upgrade later with 4 if needed
 - SELECT IMAGE : put 'bmaltais/rancher-glusterfs-client:latest'
 
 ## ADVANCED OPTIONS - Command
 - ENVIRONMENT VARS : put the environment variable that you need to custom Glusterfs
   - 
-
 
 
 
