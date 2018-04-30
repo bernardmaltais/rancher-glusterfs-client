@@ -9,7 +9,7 @@ This is part of a catalog item as found in bernardmaltais/rancher-catalog
 
 Docker container that lauch NGINX + PHP server leveraging Glusterfs as underlying file system. It's dedicated to work on Rancher environment and use auto discovery service to connect to glusterfs cluster.
 
-## Version
+# Version
 
 Current Version: **0.1.0**
 
@@ -21,7 +21,6 @@ Like I have say at the beginning, this container work only on Rancher plateform.
 
 ## ADVANCED OPTIONS - Command
 - ENVIRONMENT VARS : put the environment variable that you need to custom Glusterfs
-  - 
 
 
 
